@@ -1,0 +1,9 @@
+mumt 307 project planning
+
+Sound synthesis on the Arduino
+http://makezine.com/projects/make-35/advanced-arduino-sound-synthesis/
+http://playground.arduino.cc/Main/ArduinoSynth
+
+https://www.sparkfun.com/products/9151
+https://www.sparkfun.com/products/12082
+
