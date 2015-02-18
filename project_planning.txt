@@ -27,3 +27,13 @@ Stages:
 - Consider rewriting in C to get better sample rates and optimization. 
 - Write/update website (likely on github)
 
+Guide for shields:
+https://learn.sparkfun.com/tutorials/arduino-shields
+
+Guide for soldering:
+https://learn.sparkfun.com/tutorials/how-to-solder---through-hole-soldering
+
+Further inspiration:
+http://www.instructables.com/id/Arduino-Waveform-Generator/?ALLSTEPS
+http://www.instructables.com/id/Arduino-Audio-Output/
+http://www.instructables.com/id/Turn-your-Arduino-into-a-4-voice-wavetable-synth-w/?ALLSTEPS
