@@ -7,3 +7,23 @@ http://playground.arduino.cc/Main/ArduinoSynth
 https://www.sparkfun.com/products/9151
 https://www.sparkfun.com/products/12082
 
+https://github.com/valerie-sd/mumt307project
+
+17 FEBRUARY:
+Ordered parts today.
+Current plan is to roughly follow the tutorial for a simple audio player using a DAC and a micro-SD card shield. 
+https://www.sparkfun.com/tutorials/160
+I plan to make modifications to add potentiometers allowing more direct user action; the tutorial creates a WAV player which is less interesting to me. I'm planning to create sine waves using low and high voltages, and then have tables stored on the SD card which allow different kinds of digital effects and processes - additive synthesis, delay, reverb, etc. I haven't yet decided which and how many of these I will implement but I mean for this to be the more work-intensive part of the project. 
+
+Stages:
+- Construct the arduino add-ons and get the hardware all running.
+	- Need to refresh my soldering skills
+	- Need to diagram the circuits involved; the tutorial does none of this and I would like 			to understand exactly how it's working since I'm following the tutorial relatively closely.
+	- Need to learn how to wire the circuits to include potentiometers in the way I want them.
+- Reformat SD card for FAT16 or FAT32
+- Code a basic sine wave in the arduino language
+- Construct wave tables and other effects in arduino
+- (Likely necessary) Optimize code to run in the 2kb of runtime memory available.
+- Consider rewriting in C to get better sample rates and optimization. 
+- Write/update website (likely on github)
+

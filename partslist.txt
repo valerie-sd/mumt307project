@@ -1,0 +1,12 @@
+Parts Used:
+
+Sparkfun redboard
+DAC
+microSD shield
+0.5W (8 Ohm) speaker
+electrolytic decoupling capacitor, 10uF
+rotary potentiometers and knobs
+breakaway male headers
+6 and 8 pin stackable headers
+jumper wires
+breadboard
