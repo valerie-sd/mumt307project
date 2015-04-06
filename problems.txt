@@ -1,0 +1,3 @@
+- Had to figure out the differences between the newer and older version of the Redboard - the newer one has a few extra pins. I didn't use these but they're interesting to read about. 
+
+- The drivers necessary for the Arduino IDE to work would not load correctly on my system (Ubuntu 14.04) so I switched to a browser-based IDE, codebender.cc. The error message was about COM1 serial port. (Attempted fixes: http://blog.opensensors.io/blog/2014/09/13/getting-started-with-arduino-on-linux/ and http://www.ftdichip.com/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux%20.pdf)
