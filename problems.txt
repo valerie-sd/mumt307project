@@ -1,0 +1,9 @@
+- Had to figure out the differences between the newer and older version of the Redboard - the newer one has a few extra pins. I didn't use these but they're interesting to read about. 
+
+- The drivers necessary for the Arduino IDE to work would not load correctly on my system (Ubuntu 14.04) so I switched to a browser-based IDE, codebender.cc. The error message was about COM1 serial port. (Attempted fixes: http://blog.opensensors.io/blog/2014/09/13/getting-started-with-arduino-on-linux/ and http://www.ftdichip.com/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux%20.pdf)
+
+- Tutorial was confusing - claimed to be writing square and sine waves but the oscillation was audible; it turns out that this was a rather contrived synthesis where it used lots of tones (from sine waves) to create a new, more abstract sine wave.
+
+- It was very interesting trying to figure out how the WAV file player worked, even though I didn't use it (except for the micro-SD card functions). It has two buffers that it alternates when reading from the file so that everything is happening quickly, for the 22kHz sample rate, but without having to deal with concurrency problems. This tutorial didn't work for me, perhaps because of setup (I suspect some of the settings are different for my board) or perhaps because of the browser IDE; it seemed confused about libraries. 
+
+- Using different voltages for the sine waves I create seems to have no effect; therefore when I did additive synthesis I had to shift the calculations. Since I want a hard range of 0-255 for the voltage, and I don't want to check this during the loops (well, hopefully not during runtime at all) I had the waves in a range of 63-127 so that their sums could still be in the correct range.
