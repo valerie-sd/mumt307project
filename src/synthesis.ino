@@ -122,8 +122,8 @@ void loop(){
 		}
 		digitalWrite(CS, HIGH); 
 	}
-
-	//option 4: amplitude envelope
-	//option 5: delay line for echo
-	//option 6: Karplus-Strong plucked string synthesis
+	//option 4: squarish wave
+	//option 5: amplitude envelope
+	//option 6: delay line for echo
+	//option 7: Karplus-Strong plucked string synthesis
 }
