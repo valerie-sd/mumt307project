@@ -20,6 +20,7 @@
 #define MAXVOL 255 // maximum voltage to DAC (amplitude of sine wave)
 
 int summed[8] = {31, 54+31, 63, 54-31, 31, 9+31, 0, 9-31};
+int squarewv[64];
 
 void setup(){
 	//All of the digital pins on the Arduino will be outputs to the AD5330
@@ -67,15 +68,51 @@ void setup(){
 	//All setup() until this point is from the tutorial but since it's also right out of the 
 	//datasheet, I would consider it general knowledge.
 
+	int first[64];
+	int third[64];
+	int fifth[64];
 	//summed = {31, 54+31, 63, 54-31, 31, 9+31, 0, 9-31};
 	int x=0;
-	for(x=0; x<8; x++){
+	for(x=0; x<8; x++){//for additive synthesis
 		summed[x] += 64;
 	}
+	for(x=0; x<64; x+=8){
+		first[x] = 0;
+		first[x+1] = 23;
+		first[x+2] = 32;
+		first[x+3] = 23;
+		first[x+4] = 0;
+		first[x+5] = -23;
+		first[x+6] = -32;
+		first[x+7] = -23;
+	}
+	for(x=0; x<64; x+=8){
+		third[x] = 0;
+		third[x+1] = 12;
+		third[x+2] = 16;
+		third[x+3] = 12;
+		third[x+4] = -0;
+		third[x+5] = -12;
+		third[x+6] = -16;
+		third[x+7] = -12;
+	}
+	for(x=0; x<64; x+=2){//Simple high and low for highest freqency (amplitude half that of fundamental)
+		fifth[x] = 16;
+		fifth[x+1] = -16;
+	}
+	//SUMMING for square wave
+	for(x=0; x<64; x++){
+		squarewv[x] = first[x]+third[x]+fifth[x];
+	}
+	//adjust for 0-255 range
+	for(x=0; x<64; x++){
+		squarewv[x] += 95;
+	}
+
 }
 
 void loop(){
-	unsigned int test = 3;
+	unsigned int test = 5;
 	unsigned int VOLT = 127;
 	unsigned int index = 0;
 	while(test==1){
@@ -122,8 +159,41 @@ void loop(){
 		}
 		digitalWrite(CS, HIGH); 
 	}
-	//option 4: squarish wave
+	//option 4: squarish wave (odd harmonics) might do around 4 harmonics? 3 so far.
+	while(test==4){
+		digitalWrite(CS, LOW);		
+		for(index=0; index<64; index++){
+			digitalWrite(WR, LOW);		
+			PORTD = squarewv[index];			
+			digitalWrite(WR, HIGH);		
+			delayMicroseconds(PERIOD/64);
+		}
+		digitalWrite(CS, HIGH); 
+	}
 	//option 5: amplitude envelope
+	while(test==5){
+		unsigned int samples = 0;
+		for(VOLT=MAXVOL; VOLT>0; VOLT--){
+			//Serial.print(VOLT);
+			//for(samples=0; samples<5; samples++){
+			for(samples=0; samples<10; samples++){
+				//playing VOLT with frequency for A4 (wave1)
+				digitalWrite(CS, LOW);//"chip select" pin	
+
+				digitalWrite(WR, LOW);//"input write" pin	
+				PORTD = VOLT;//This is a more concise version of doing digitalWrite() to all Dx digital pins.
+				digitalWrite(WR, HIGH);		
+				delayMicroseconds(PERIOD/2);
+			
+				digitalWrite(WR, LOW);
+				PORTD = 0;
+				digitalWrite(WR, HIGH);
+				delayMicroseconds(PERIOD/2); 
+
+				digitalWrite(CS, HIGH); 
+			}
+		}
+	}
 	//option 6: delay line for echo
 	//option 7: Karplus-Strong plucked string synthesis
 }
