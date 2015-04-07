@@ -30,7 +30,8 @@ http://creativecommons.org/licenses/by/3.0/
 					// 1/261 equals a period of .003831 seconds, or 3831 micro-seconds
 #define VOL 0xFF	//VOL defines the voltage to be sent to the AD5330. 0xFF is the maximum voltage.
 
-unsigned int note=0;	//Use if the 'generate sinewave' portion of the code is enabled.
+//unsigned int note=0;	//Use if the 'generate sinewave' portion of the code is enabled.
+double sines[180];
 
 void setup()
 {
@@ -59,12 +60,19 @@ void setup()
   digitalWrite(WR, LOW);
   delayMicroseconds(10); 
   
+  //double sines[360];
+  int index = 0;
+  for(index = 0; index < 360; index +=2){
+  	double temp = sin(deg2rad(index));
+  	temp = temp * 127 +127;
+  	sines[index/2] = temp;
+  }
 }
 
 void loop()
 {
-  //Generate a Square Wave. The tone is set by the value of FREQ. The amplitude of the wave is set by VOL.
-  digitalWrite(CS, LOW);		//Ready the AD5330 for input
+	//playing one note
+	digitalWrite(CS, LOW);		//Ready the AD5330 for input
 
   digitalWrite(WR, LOW);		//Enable Writes on the AD5330
   PORTD = VOL;					//Set the voltage on the AD5330
@@ -77,6 +85,21 @@ void loop()
 
   digitalWrite(CS, HIGH); 
   
+  
+  /*//Generate a Square Wave. The tone is set by the value of FREQ. The amplitude of the wave is set by VOL.
+  digitalWrite(CS, LOW);		//Ready the AD5330 for input
+
+  digitalWrite(WR, LOW);		//Enable Writes on the AD5330
+  PORTD = VOL;					//Set the voltage on the AD5330
+  digitalWrite(WR, HIGH);		//Clock in the new data
+  delayMicroseconds(FREQ/2);	//Wait for the specified amount of time
+  digitalWrite(WR, LOW);		//Repeat for the 'low' portion of the wave.
+  PORTD = 0x00;
+  digitalWrite(WR, HIGH);
+  delayMicroseconds(FREQ/2);  
+
+  digitalWrite(CS, HIGH); 
+  */
   /*
   //Generate a Sine Wave (pretty slow...probably because of sine() function).
   digitalWrite(CS, LOW);
@@ -90,6 +113,17 @@ void loop()
     digitalWrite(WR, HIGH);
     delayMicroseconds(FREQ);
   }  
+  digitalWrite(CS, HIGH);
+  */
+  //my sine wave using array
+  /*digitalWrite(CS, LOW);
+	  for(int index=0; index < 180; index++)
+	  {
+	    digitalWrite(WR, LOW);
+	    PORTD = (unsigned char)sines[index];
+	    digitalWrite(WR, HIGH);
+	    delayMicroseconds(FREQ);
+	  }  
   digitalWrite(CS, HIGH);
   */
 }
