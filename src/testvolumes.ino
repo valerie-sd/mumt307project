@@ -55,7 +55,9 @@ void loop(){
 	unsigned int index = 0;
 	unsigned int samples = 0;
 	for(VOLT=MAXVOL; VOLT>0; VOLT--){
-		for(samples=0; samples<300; samples++){
+		//Serial.print(VOLT);
+		//for(samples=0; samples<5; samples++){
+		for(samples=0; samples<10; samples++){
 			//playing VOLT with frequency for A4 (wave1)
 			digitalWrite(CS, LOW);//"chip select" pin	
 
@@ -72,4 +74,5 @@ void loop(){
 			digitalWrite(CS, HIGH); 
 		}
 	}
+	while(true);
 }
