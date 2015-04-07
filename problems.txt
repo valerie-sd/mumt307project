@@ -7,3 +7,8 @@
 - It was very interesting trying to figure out how the WAV file player worked, even though I didn't use it (except for the micro-SD card functions). It has two buffers that it alternates when reading from the file so that everything is happening quickly, for the 22kHz sample rate, but without having to deal with concurrency problems. This tutorial didn't work for me, perhaps because of setup (I suspect some of the settings are different for my board) or perhaps because of the browser IDE; it seemed confused about libraries. 
 
 - Using different voltages for the sine waves I create seems to have no effect; therefore when I did additive synthesis I had to shift the calculations. Since I want a hard range of 0-255 for the voltage, and I don't want to check this during the loops (well, hopefully not during runtime at all) I had the waves in a range of 63-127 so that their sums could still be in the correct range.
+
+- For volume testing, I figured out that the majority of audible differences are towards the low end of the voltage spectrum; the change is not linear.
+
+- For the square wave additive synthesis, I had a hard time making it sound right; so far I only have 3 harmonics (1st, 3rd, 5th) and it sounds just like a high-pitched wave made from additive synthesis - not particularly square. (TODO: check harmonics with some kind of analysis.) I think I'm also approaching problems where the period is stored as an int and when it is divided to make higher frequencies, it loses accuracy. This is why I have yet to add in any more harmonics. 
+
