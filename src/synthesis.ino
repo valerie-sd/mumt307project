@@ -23,16 +23,35 @@ int summed[8] = {31, 54+31, 63, 54-31, 31, 9+31, 0, 9-31};
 
 void setup(){
 	//All of the digital pins on the Arduino will be outputs to the AD5330
+	/*Arduino takes no input for this system; only output for now. I might change this later
+	when/if I add potentiometers for option choices. 
+	*/
 	for(int pin=0; pin<19; pin++){
 		pinMode(pin, OUTPUT);
 	} 
-
+	/*PD HIGH: power-down pin. LOW would put the DAC in power-down mode. 
+	*/
 	digitalWrite(PD, HIGH);  //Enable the AD5330
+	/*GAIN LOW: This is the output amplifier gain. Can be set to 1 or 2. (Range for 1: 0.001V to Vref)
+	*/
 	digitalWrite(GAIN, LOW);  //Set Gain to 1
+	/*BUF HIGH: turns off buffering since I want the input to be handled immediately. This setting has fewer
+	restrictions for voltage.
+	*/
 	digitalWrite(BUF, HIGH);  //Don't buffer the input
+	/*CS HIGH: LOW would set the device? Not really sure what this means but we disable it for
+	now and when it is used, like WR, it will be set to LOW. 
+	*/
 	digitalWrite(CS, HIGH);  //Set the CS high by default
+	/*WR HIGH: LOW would control the input; I will do this later, so this is just a default. 
+	*/
 	digitalWrite(WR, HIGH);  //Set the WR pin high by default
+	/*CLR HIGH: LOW would reset the input and DAC register, but for this I want those to be persistent.
+	*/
 	digitalWrite(CLR, HIGH);  //Make sure Clear pin is disabled
+	/*LDAC LOW: means that the contents of the input buffer are transferred to the DAC register. 
+	If it were high, that would mean the DAC re
+	*/
 	digitalWrite(LDAC, LOW);
 
 	//Clock in Gain and Buffer Values
@@ -103,4 +122,8 @@ void loop(){
 		}
 		digitalWrite(CS, HIGH); 
 	}
+
+	//option 4: amplitude envelope
+	//option 5: delay line for echo
+	//option 6: Karplus-Strong plucked string synthesis
 }
