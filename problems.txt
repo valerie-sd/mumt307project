@@ -10,5 +10,4 @@
 
 - For volume testing, I figured out that the majority of audible differences are towards the low end of the voltage spectrum; the change is not linear.
 
-- For the square wave additive synthesis, I had a hard time making it sound right; so far I only have 3 harmonics (1st, 3rd, 5th) and it sounds just like a high-pitched wave made from additive synthesis - not particularly square. (TODO: check harmonics with some kind of analysis.) I think I'm also approaching problems where the period is stored as an int and when it is divided to make higher frequencies, it loses accuracy. This is why I have yet to add in any more harmonics. 
-
+- For the square wave additive synthesis, I am having a hard time making it sound right; so far I only have 3 harmonics (1st, 3rd, 5th) and it sounds just like a high-pitched wave made from additive synthesis - not particularly square. (TODO: check harmonics with some kind of analysis.) I think I'm also approaching problems where the period is stored as an int and when it is divided to make higher frequencies, it loses accuracy. This is why I have yet to add in any more harmonics. Also it seems when played individually that the 5th harmonic already has this problem. 
