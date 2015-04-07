@@ -21,6 +21,9 @@
 
 int summed[8] = {31, 54+31, 63, 54-31, 31, 9+31, 0, 9-31};
 int squarewv[64];
+int first[64];
+int third[64];
+int fifth[64];
 
 void setup(){
 	//All of the digital pins on the Arduino will be outputs to the AD5330
@@ -68,15 +71,12 @@ void setup(){
 	//All setup() until this point is from the tutorial but since it's also right out of the 
 	//datasheet, I would consider it general knowledge.
 
-	int first[64];
-	int third[64];
-	int fifth[64];
 	//summed = {31, 54+31, 63, 54-31, 31, 9+31, 0, 9-31};
 	int x=0;
 	for(x=0; x<8; x++){//for additive synthesis
 		summed[x] += 64;
 	}
-	for(x=0; x<64; x+=8){
+	for(x=0; x<64; x+=16){
 		first[x] = 0;
 		first[x+1] = 23;
 		first[x+2] = 32;
@@ -112,9 +112,10 @@ void setup(){
 }
 
 void loop(){
-	unsigned int test = 5;
+	unsigned int test = 4;
 	unsigned int VOLT = 127;
 	unsigned int index = 0;
+	unsigned int samples = 0;
 	while(test==1){
 		//playing VOLT with frequency for A4 (wave1)
 		digitalWrite(CS, LOW);//"chip select" pin	
@@ -161,18 +162,50 @@ void loop(){
 	}
 	//option 4: squarish wave (odd harmonics) might do around 4 harmonics? 3 so far.
 	while(test==4){
-		digitalWrite(CS, LOW);		
-		for(index=0; index<64; index++){
-			digitalWrite(WR, LOW);		
-			PORTD = squarewv[index];			
-			digitalWrite(WR, HIGH);		
-			delayMicroseconds(PERIOD/64);
-		}
-		digitalWrite(CS, HIGH); 
+		/*for(samples=0; samples<40; samples++){
+			digitalWrite(CS, LOW);		
+			for(index=0; index<64; index++){
+				digitalWrite(WR, LOW);		
+				PORTD = first[index];			
+				digitalWrite(WR, HIGH);		
+				delayMicroseconds(PERIOD/64);
+			}
+			digitalWrite(CS, HIGH); 
+		}*/
+		/*for(samples=0; samples<40; samples++){
+			digitalWrite(CS, LOW);		
+			for(index=0; index<64; index++){
+				digitalWrite(WR, LOW);		
+				PORTD = third[index];			
+				digitalWrite(WR, HIGH);		
+				delayMicroseconds(PERIOD/64);
+			}
+			digitalWrite(CS, HIGH); 
+		}*/
+		for(samples=0; samples<40; samples++){
+			digitalWrite(CS, LOW);		
+			for(index=0; index<64; index++){
+				digitalWrite(WR, LOW);		
+				PORTD = fifth[index];			
+				digitalWrite(WR, HIGH);		
+				delayMicroseconds(PERIOD/64);
+			}
+			digitalWrite(CS, HIGH); 
+		}/*
+		for(samples=0; samples<40; samples++){
+			digitalWrite(CS, LOW);		
+			for(index=0; index<64; index++){
+				digitalWrite(WR, LOW);		
+				PORTD = squarewv[index];			
+				digitalWrite(WR, HIGH);		
+				delayMicroseconds(PERIOD/64);
+			}
+			digitalWrite(CS, HIGH); 
+		}*/
+		//while(true);//stop audible output
 	}
 	//option 5: amplitude envelope
 	while(test==5){
-		unsigned int samples = 0;
 		for(VOLT=MAXVOL; VOLT>0; VOLT--){
 			//Serial.print(VOLT);
 			//for(samples=0; samples<5; samples++){
@@ -194,6 +227,6 @@ void loop(){
 			}
 		}
 	}
-	//option 6: delay line for echo
+	//option 6: delay line for echo or reverb
 	//option 7: Karplus-Strong plucked string synthesis
 }
