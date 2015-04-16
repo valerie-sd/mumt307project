@@ -78,13 +78,21 @@ void setup(){
 	}
 	for(x=0; x<64; x+=16){
 		first[x] = 0;
-		first[x+1] = 23;
-		first[x+2] = 32;
+		first[x+1] = 0;
+		first[x+2] = 23;
 		first[x+3] = 23;
-		first[x+4] = 0;
-		first[x+5] = -23;
-		first[x+6] = -32;
-		first[x+7] = -23;
+		first[x+4] = 32;
+		first[x+5] = 32;
+		first[x+6] = 23;
+		first[x+7] = 23;
+		first[x+8] = 0;
+		first[x+9] = 0;
+		first[x+10] = -23;
+		first[x+11] = -23;
+		first[x+12] = -32;
+		first[x+13] = -32;
+		first[x+14] = -23;
+		first[x+15] = -23;
 	}
 	for(x=0; x<64; x+=8){
 		third[x] = 0;
