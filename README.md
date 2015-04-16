@@ -2,6 +2,8 @@
 
 Implementing digital audio synthesis and effects on the Sparkfun redboard/Arduino uno.
 
+*Click the wiki link on the side for more details ->* 
+
 Video of tests 1 through 5:
 1. low A tone
 2. mid A tone
@@ -10,6 +12,7 @@ Video of tests 1 through 5:
 5. envelope test
 6. delay line
 7. plucked string
+
 ![Video test 1](https://www.dropbox.com/s/2ow44ef8rfm5xin/tests_1-5.mov?dl=0)
 
 *What currently works:*
