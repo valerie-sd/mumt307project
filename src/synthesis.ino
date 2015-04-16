@@ -91,14 +91,16 @@ void setup(){
 		third[x+1] = 12;
 		third[x+2] = 16;
 		third[x+3] = 12;
-		third[x+4] = -0;
+		third[x+4] = 0;
 		third[x+5] = -12;
 		third[x+6] = -16;
 		third[x+7] = -12;
 	}
-	for(x=0; x<64; x+=2){//Simple high and low for highest freqency (amplitude half that of fundamental)
-		fifth[x] = 16;
-		fifth[x+1] = -16;
+	for(x=0; x<64; x+=4){//Simple high and low for highest freqency (amplitude half that of fundamental)
+		fifth[x] = 0;
+		fifth[x+1] = 16;
+		fifth[x+2] = 0;
+		fifth[x+3] = -16;
 	}
 	//SUMMING for square wave
 	for(x=0; x<64; x++){
@@ -181,7 +183,7 @@ void loop(){
 				delayMicroseconds(PERIOD/64);
 			}
 			digitalWrite(CS, HIGH); 
-		}*/
+		}*//*
 		for(samples=0; samples<40; samples++){
 			digitalWrite(CS, LOW);		
 			for(index=0; index<64; index++){
@@ -191,7 +193,7 @@ void loop(){
 				delayMicroseconds(PERIOD/64);
 			}
 			digitalWrite(CS, HIGH); 
-		}/*
+		}*/
 		for(samples=0; samples<40; samples++){
 			digitalWrite(CS, LOW);		
 			for(index=0; index<64; index++){
@@ -201,7 +203,7 @@ void loop(){
 				delayMicroseconds(PERIOD/64);
 			}
 			digitalWrite(CS, HIGH); 
-		}*/
+		}
 		//while(true);//stop audible output
 	}
 	//option 5: amplitude envelope
